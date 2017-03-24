@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>King of Glory Player List</title>
+
+</head>
+<body>
+    <p id="query">query:</p>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="functionn.js"></script>
+<script type="text/javascript">
+
+
+function GetUrlParms()
+{
+    var args=new Object();
+    var query=location.search.substring(1); // get the query string
+    document.getElementById("query").innerHTML = query;
+    var pairs=query.split("&");
+    for(var i=0;i<pairs.length;i++)
+    {
+        var pos=pairs[i].indexOf('=');
+        if(pos==-1) continue;
+        var argname=pairs[i].substring(0,pos);
+        var value=pairs[i].substring(pos+1);
+        args[argname]=unescape(value);
+    }
+    return args;
+}
+function go()
+{
+    args = GetUrlParms();
+    if(args["id"]!=undefined)
+    {
+        var value = args["id"];
+        var ar = Module.main(value).split("|");
+        if(ar.length==3)
+        {
+            var s = "api.php?id=" + args["id"] + "&hash=" + ar[0] + "&time=" + ar[1];
+            $(document).ready(function(){
+              content=$.ajax({url:s, async:false});
+              $("#output").html(content.responseText);
+            });
+
+        }
+        if((ar.length==1)&(ar[0]=='WrongBoy'))
+        {
+            alert('Hello Hacker~');
+        }
+    }
+}
+
+var wait = setInterval(function(){
+    if(Module.main != undefined){clearInterval(wait);go();}
+}, 100);
+
+</script>
+<center><h1>King of Glory Player List</h1></center>
+<center><div id="output"><h2>hmmmm</h2></div></center>
+</body>
+/html>
